@@ -2,11 +2,21 @@
 <ion-content>
   
   <div class="img-fondo">
-    <div class="fondo-negro p-1">
+    <div class="fondo-blanco p-1">
 
       <div class="container center">
         
-        <br color="dark">
+        <div class="text-center">
+          <h1 class="logo">
+            <strong>
+              Livereat
+            </strong>
+            <div class="subrayado"></div>
+          </h1>
+          <img class="logo img" src="../../../assets/foodRoket.png" alt="">
+        </div>
+        
+        <br><br>
   
         <ion-item color="light">
           <ion-label position='floating'>Correo</ion-label>
@@ -30,8 +40,7 @@
         <ion-button expand="full"  color="primary" (click)="validar()">Iniciar sesión</ion-button>
   
         <br>
-  
-        <ion-button expand="full" class="btn-face" color="medium" (click)="loginFB()"><ion-icon name="logo-facebook"></ion-icon> Iniciar con Facebook</ion-button>
+        <ion-button expand="full"  color="primary" (click)="login()"><ion-icon name="logo-facebook"></ion-icon> Iniciar con Facebook</ion-button>
   
         <br>
   

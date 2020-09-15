@@ -4,8 +4,8 @@
 
 export const environment = {
   production: true,
-  wsUrl: 'https://livereat.herokuapp.com/',
-  URI:'https://livereat.herokuapp.com/'
+  wsUrl: 'http://localhost:5000/',
+  URI:'http://localhost:5000/'
 };
 
 export const cliente = {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { HerramientasService } from 'src/app/services/herramientas.service';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { RegistrarseService } from 'src/app/services/registrarse.service';
 import { UserService } from 'src/app/services/user.service';
 import { WebsocketService } from 'src/app/services/websocket.service';
@@ -17,7 +16,6 @@ export class IniciarSesionPage implements OnInit {
 
   constructor(public loadingController: LoadingController,
     private herramientasService:HerramientasService,
-    private fb: Facebook,
     private registrarseService:RegistrarseService,
     private userService:UserService,
     private wsService:WebsocketService,
@@ -42,9 +40,9 @@ export class IniciarSesionPage implements OnInit {
     }
   }
 
-  loguearse(){
+  async loguearse(){
     
-    this.registrarseService.iniciarSesion(this.correo,this.pass).subscribe(res => {
+    this.registrarseService.iniciarSesion(this.correo,this.pass).subscribe(async res => {
       
       console.log(res);
       const user:any = res;
@@ -52,11 +50,14 @@ export class IniciarSesionPage implements OnInit {
       if (user.res === 'usuario registrado') {
     
         //se guarda el usuario en la variable de entorno
-        this.userService.guardarUsuario(res);
+        await this.userService.guardarUsuario(res);
 
         //se envia la informacion del usuario para el servicio de ws
-        this.guardarUsuarioWS(res);
+        await this.guardarUsuarioWS(res);
         
+        this.loadingController.dismiss();
+        this.router.navigate(['/index-tab']);
+
       }else{
 
         this.herramientasService.dismissLoading();
@@ -73,12 +74,12 @@ export class IniciarSesionPage implements OnInit {
   guardarUsuarioWS(user:any){
    
     //se envia los datos del usuario a ws
-    this.wsService.loginWS(user.nombre, user.id, user.imgUrl, 'cliente').then((res) => {
+    this.wsService.loginWS(user.nombre, user.id, user.imgUrl).then((res) => {
     
       //se guarda en el storage
       this.userService.guardarStorage();
       this.herramientasService.dismissLoading();
-      this.router.navigate(['/tabs']);
+      this.router.navigate(['/index-tab']);
     
     }).catch((err) => {
     
@@ -90,12 +91,18 @@ export class IniciarSesionPage implements OnInit {
 
   }
 
-  loginFB(){
-    this.fb.login(['public_profile', 'user_friends', 'email'])
-    .then((res: FacebookLoginResponse) => {
-      console.log('Logged into Facebook!', res);
-    })
-    .catch(e => console.log('Error logging into Facebook', e));
+  async login() {
+
+    
+  }
+  
+  onLoginSuccess(res:any) {
+    // const { token, secret } = res;
+    
+
+  }
+  onLoginError(err) {
+    console.log(err);
   }
 
 }

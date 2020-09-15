@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -7,47 +7,41 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="dark">
+<ion-content>
 
   <div class="img-fondo">
-    <div class="fondo-negro p-1">
+    <div class="fondo-blanco p-1">
 
       <div class="p-2">
 
         <br color="dark">
 
-        <ion-item color="tertiary">
-          <ion-label  position='floating'>Nombre</ion-label>
+        <ion-item color="light">
+          <ion-label  position='floating'>Nombre Completo</ion-label>
           <ion-input  [(ngModel)]="nombre" name='nombre' type="text"></ion-input>
         </ion-item>
-
         <br>
-        <ion-item  color="tertiary">
-          <ion-label position='floating'>Apellido</ion-label>
-          <ion-input [(ngModel)]="apellido" name='apellido' type="text"></ion-input>
-        </ion-item>
-        <br>
-        <ion-item  color="tertiary">
+        <ion-item  color="light">
           <ion-label position='floating'>Cedula</ion-label>
           <ion-input [(ngModel)]="cedula" name='cedula' type="number"></ion-input>
         </ion-item>
         <br>
-        <ion-item  color="tertiary">
+        <ion-item  color="light">
           <ion-label position='floating'>Correo</ion-label>
           <ion-input [(ngModel)]="correo" name='correo' type="email"></ion-input>
         </ion-item>
         <br>
-        <ion-item  color="tertiary">
+        <ion-item  color="light">
           <ion-label position='floating'>Contraseña</ion-label>
           <ion-input [(ngModel)]="pass" name='pass' type="password"></ion-input>
         </ion-item>
         
-        <br color="dark">
+        <br>
     
-        <ion-item color="dark">
-          <ion-label >
+        <ion-item color="light">
+          <label >
             Imagen de  perfil
-          </ion-label>
+          </label>
           <ion-avatar slot="end" class="avatar">
               <input type="file" accept="image/*" class="d-none" (change)='onImgSelected($event)' #imgInput>
             <div class="text-center w-100 img-negocio">
@@ -60,7 +54,12 @@
 
         <br color="dark">
     
-        <ion-button expand="full" color="primary" (click)="validar()">Registrarse</ion-button>
+        <div class="p-3">
+          <button class="btn-next" (click)="validar()">
+            Registrarse
+          </button>
+        </div>
+
     
       </div>
       

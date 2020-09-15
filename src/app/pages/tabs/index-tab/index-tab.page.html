@@ -1,0 +1,55 @@
+<ion-header id='header' #header no-border >
+  <ion-toolbar color='primary' class="p-0 text-white">
+
+    <ion-title slot="start">
+      <h1 class="logo">
+        <strong>
+          Livereat
+        </strong>
+        <div class="subrayado"></div>
+      </h1>
+      <img class="logo img" src="../../../../assets/logo-white.png" alt="">
+    </ion-title>
+
+    <ion-buttons slot="end" [routerLink]="[ '/carrito']">
+      <ion-button>
+        <ion-icon class="shop-cart" name="cart"></ion-icon>
+        <ion-badge>4</ion-badge>
+      </ion-button>
+    </ion-buttons>
+
+
+    <!-- <ion-button (click)="toggleMenu()" slot="end" class="text-white" fill="clear">
+        <ion-icon name="menu"></ion-icon>
+    </ion-button> -->
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-tabs id='tabs' #tabs>
+  <ion-tab-bar slot="top">
+
+    <ion-tab-button (click)="bajarScroll()" tab="map">
+      <ion-icon name="pin"></ion-icon>
+      <ion-label>Mapa</ion-label>
+    </ion-tab-button>
+
+
+    <ion-tab-button (click)="bajarScroll()" tab="mi_perfil">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Mi perfil</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="bajarScroll()" tab="pedidos">
+      <ion-icon ios="ios-restaurant" md="md-restaurant"></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button [routerLink]="[ '/tab-chat']">
+      <ion-icon name="chatbubbles"></ion-icon>
+      <ion-label>Chat</ion-label>
+      <ion-badge *ngIf="mensajesSinVer > 0">!</ion-badge>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+</ion-tabs>

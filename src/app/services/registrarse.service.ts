@@ -46,10 +46,10 @@ export class RegistrarseService {
 
   }
   
-  registrarNuevoUsusario(nombre,apellido,correo,pass,cedula,img:File){
+  registrarNuevoUsusario(nombre,correo,pass,cedula,img:File){
     const fm = new FormData;
     console.log(nombre);
-    fm.append('nombre', nombre+' '+apellido);
+    fm.append('nombre', nombre);
     fm.append('correo', correo);
     fm.append('password', pass);
     fm.append('cedula', cedula);

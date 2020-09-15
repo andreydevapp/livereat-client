@@ -3,6 +3,7 @@ import { HerramientasService } from 'src/app/services/herramientas.service';
 import { RegistrarseService } from 'src/app/services/registrarse.service';
 import { WebsocketService } from 'src/app/services/websocket.service';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 interface HtmlInputEvent extends Event{
   target:HTMLInputElement &  EventTarget
@@ -18,13 +19,13 @@ export class RegistrarsePage implements OnInit {
   constructor(private herramientas:HerramientasService,
     private registrarseService:RegistrarseService,
     private wsService:WebsocketService,
-    private userService:UserService) { }
+    private userService:UserService,
+    private router:Router) { }
 
   ngOnInit() {
   }
 
   nombre:string = '';
-  apellido:string = '';
   cedula:string = '';
   correo:string = '';
   pass:string = '';
@@ -34,7 +35,7 @@ export class RegistrarsePage implements OnInit {
 
   validar(){
 
-    if (this.nombre !== '' && this.apellido !== '' && this.cedula !== '' && this.correo !== '' && this.pass !== '') {
+    if (this.nombre !== '' && this.cedula !== '' && this.correo !== '' && this.pass !== '') {
       this.registrarUsuario(); 
     }else{
       this.herramientas.presentAlert('Es necesario llenar todos los campos');
@@ -48,15 +49,18 @@ export class RegistrarsePage implements OnInit {
     await this.herramientas.presentLoading();
 
     //se registra el usuario
-    this.registrarseService.registrarNuevoUsusario(this.nombre,this.apellido,this.correo,this.pass,this.cedula,this.file).subscribe(async res => {
+    this.registrarseService.registrarNuevoUsusario(this.nombre,this.correo,this.pass,this.cedula,this.file).subscribe(async res => {
       
       const user:any = res;
+      console.log(res);
 
       if (user.res === 'usuario registrado') {
     
         //se guarda el usuario en la variable de entorno
         this.userService.guardarUsuario(res);
         this.guardarUsuarioWS(res);
+        this.router.navigate(["/index-tab"]);
+        this.herramientas.dismissLoading();
         
       }else{
 
@@ -66,7 +70,7 @@ export class RegistrarsePage implements OnInit {
       }  
 
       //se guarda los datos en el servicio ws
-      this.guardarUsuarioWS(res);
+      //this.guardarUsuarioWS(res);
 
     },err => {
 
@@ -79,7 +83,7 @@ export class RegistrarsePage implements OnInit {
 
   guardarUsuarioWS(user:any){
     //se guarda los datos en el ws, en el ws hay un metodo para guardar los datos en la variable de entorno de    usuario
-    this.wsService.loginWS(user.nombre, user.id, user.imgUrl, 'cliente').then((res) => {
+    this.wsService.loginWS(user.nombre, user.id, user.imgUrl).then((res) => {
     
       //se guarda en el storage
       this.userService.guardarStorage();

@@ -1,0 +1,128 @@
+<ion-header >
+  <ion-toolbar id='headerNegocio' #headerNegocio color='primary'>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+      <ion-title slot="start">{{nombre}}</ion-title>
+      <ion-button slot="end" (click)="irAlCarrito()" fill="clear">
+        <ion-icon class="shop-cart text-white" name="cart"></ion-icon>
+        <ion-badge >{{cantidadEnCarrito}}</ion-badge>
+      </ion-button>
+  </ion-toolbar>
+  <ion-segment color="light" (ionChange)="segmentChanged($event)" value="Platillo">
+    <ion-segment-button class="p-2" value="Platillo">
+      <label *ngIf="tipo === 'Platillo'" class="tipo active">Platillos</label>
+      <label *ngIf="tipo !== 'Platillo'" class="tipo">Platillos</label>
+    </ion-segment-button>
+    <ion-segment-button class="p-2" value="Bebida">
+      <label *ngIf="tipo === 'Bebida'" class="tipo active">Bebidas</label>
+      <label *ngIf="tipo !== 'Bebida'" class="tipo">Bebidas</label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content color="light" >
+
+  <div class="p-3">
+    <ion-item lines="full">
+      <ion-avatar slot="start">
+        <img [src]="imagen">
+      </ion-avatar>
+      <ion-label slot="end" class="text-center text-muted">
+        <h3>{{platillos.cantiPlatillos}}</h3>
+        <h3>Platillos</h3>
+      </ion-label>
+      <ion-label slot="end" class="text-center text-muted">
+        <h3>{{platillos.cantiBebidas}}</h3>
+        <h3>Bebidas</h3>
+      </ion-label>
+    </ion-item>
+  </div>
+
+  <div class="p-2 w-100 secondary" *ngIf="platillos.res === 'Sin platillos' || platillos.res === 'Sin bebidas'">
+    <h5>{{platillos.res}} </h5>
+  </div>
+
+  <div class="w-100 bg-white animated p-3" *ngFor="let platillo of platillos.platillos">
+
+    <img class="w-100 img-platillo" [src]="platillo.imagen" alt="">
+    
+    <div class="contenedor p-1 w-100">
+
+      <div  class="p-1 nom-container">
+        <span class="nom-platillo">
+            <strong>
+              {{platillo.nombre}}
+            </strong>
+          </span>
+      </div>
+      <div class="p-1 w-100">
+        <span class="text-muted descripcion">
+          {{platillo.descripcion}}
+        </span>
+      </div>
+      <div class="p-1">
+        <div *ngIf="platillo.estado === 1" class="platillo-estado">
+          <span class="text-muted">
+            Diponibilidad: 
+          </span>
+          <span class="text-success" >
+            <ion-icon ios="ios-pricetag" md="md-pricetag"></ion-icon> En Stock
+          </span>
+        </div>
+        <div *ngIf="platillo.estado === 0">
+          <span class="text-muted">
+            Diponibilidad: 
+          </span>
+          <span class="text-danger">
+            <ion-icon ios="ios-pricetag" md="md-pricetag"></ion-icon> Agotado
+          </span>
+        </div>
+      </div>
+      <div class="text-muted precio p-1">
+        Precio: ₡ {{platillo.precio | number}}
+      </div>
+  
+      <div class="p-2">
+        <div class="hr"></div>
+      </div>
+
+      <div class="w-100">
+        <div class="aling">
+          <label class="text-muted">
+            <ion-icon ios="ios-share-alt" md="md-share-alt"></ion-icon> Compartir
+          </label>
+        </div>
+        <div class="aling">
+          <label class="text-muted">
+            <ion-icon ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon> Consultar
+          </label>
+        </div>
+      </div>
+
+      <div class="p-1">
+        <div class="hr"></div>
+      </div>
+
+      <div class="p-2">
+        <button class="btn-add p-2" (click)="agregarAlCarrito(platillo._id,platillo.nombre,platillo.imagen,platillo.imagenMin,platillo.precio)">
+          <ion-icon ios="ios-cart" md="md-cart"></ion-icon> Agregar al carrito
+        </button>
+      </div>
+
+    </div>
+    
+    
+
+    <div class="br"></div>
+
+  </div>
+
+  <br><br>
+
+  
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  
+</ion-footer>

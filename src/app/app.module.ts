@@ -12,15 +12,19 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-import { Facebook } from '@ionic-native/facebook/ngx';
-
 import { HttpClientModule } from '@angular/common/http';
 
 import { HTTP } from '@ionic-native/http/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { FileTransfer} from '@ionic-native/file-transfer/ngx';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+
+
 
 //import {environment,cliente} from '../../environments/environment.prod';
-import {environment,cliente} from '../environments/environment';
+import {environment,configFirebase} from '../environments/environment.prod';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 const config: SocketIoConfig = {
@@ -40,9 +44,12 @@ const config: SocketIoConfig = {
   ],
   providers: [
     StatusBar,
+    FileTransfer,
+    FileChooser,
     SplashScreen,
-    Facebook,
+    File,
     HTTP,
+    FilePath,
     OneSignal,
     Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

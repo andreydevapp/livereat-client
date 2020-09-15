@@ -50,9 +50,11 @@ export class WebsocketService {
     (usuario-activo = true), de esta manera se hara un order by de los usuarios que estan activos 
     */
 
-   loginWS( nombre: string, id:string ,imgUrl:string,opc) {
+   loginWS( nombre: string, id:string ,imgUrl:string) {
 
     console.log(imgUrl);
+
+    const opc = 'cliente';
 
     return new Promise(  (resolve, reject) => {
 
@@ -88,7 +90,7 @@ export class WebsocketService {
         const id = this.usuarioService.usuario.id;
         this.emit( 'configurar-ImgPerfil', { id, pathImg }, resp => {
 
-          this.usuarioService.usuario.imgUrl = pathImg;
+          this.usuarioService.usuario.imagen = pathImg;
           localStorage.setItem('usuario', JSON.stringify(this.usuarioService.usuario));
 
           resolve();

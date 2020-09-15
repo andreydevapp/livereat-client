@@ -4,22 +4,21 @@ export class Usuario {
     public id: string;
     public idWS:string;
     public token: string;
-    public imgUrl: string;
+    public imagen: string;
     public email: string;
     public logueadoConFb:boolean;
     public opc:string;
 
-    constructor( nombre: string, id: string, token: string, imgUrl: string, email: string) {
+    constructor( nombre: string, id: string, token: string, imagen: string, email: string) {
         
         this.nombre = nombre;
         this.id = id;
         this.idWS = 'sin-id';
         this.token = token;
-        this.imgUrl = imgUrl;
+        this.imagen = imagen;
         this.email = email;
         this.logueadoConFb = false;
         this.opc = 'cliente';
-
     }
 
 

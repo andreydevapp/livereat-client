@@ -1,0 +1,106 @@
+<ion-content class="ion-content" [scrollEvents]="true" (ionScroll)="onScroll($event)">
+
+
+  <ion-list>
+
+    <ion-item lines="none" color="primary">
+        <ion-avatar slot="start">
+            <img [src]="uri+this.userService.usuario.imagen">
+        </ion-avatar>
+        <ion-card-title >
+            <strong>
+                {{this.userService.usuario.nombre}}
+            </strong> 
+        </ion-card-title>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list class="p-2">
+      <ion-item class="p-2 ion-item" routerLink="/pedidos" lines="none">
+          <ion-avatar slot="start">
+              <img src="../../../assets/order.png">
+          </ion-avatar>
+          <ion-label>
+              <span>
+                  Mis ordenes
+              </span>
+          </ion-label>
+      </ion-item>
+      <div class="p-1"></div>
+      <ion-item class="p-2 ion-item" routerLink="/tab-platillos" lines="none">
+          <ion-avatar slot="start">
+              <img src="../../../assets/plus.png">
+          </ion-avatar>
+          <ion-label>
+              Administrar mis platillos
+          </ion-label>
+      </ion-item>
+      <div class="p-1"></div>
+      <ion-item class="p-2 ion-item" routerLink="/tab-platillos" lines="none" >
+          <ion-avatar slot="start">
+              <img src="../../../assets/sale.png">
+          </ion-avatar>
+          <ion-label>
+              Crear ofertas
+          </ion-label>
+      </ion-item>
+      <div class="p-1"></div>
+      <ion-item class="p-2 ion-item" routerLink="/tab-platillos" lines="none" >
+          <ion-avatar slot="start">
+              <img src="../../../assets/lunch.png">
+          </ion-avatar>
+          <ion-label>
+              Historial de pedidos
+          </ion-label>
+      </ion-item>
+      <div class="p-1"></div>
+      <ion-item class="p-2 ion-item" routerLink="/tab-platillos" lines="none" >
+          <ion-avatar slot="start">
+              <img src="../../../assets/presentation.png">
+          </ion-avatar>
+          <ion-label>
+              Información de ingresos
+          </ion-label>
+      </ion-item>
+      <div class="p-1"></div>
+      <ion-item class="p-2 ion-item" routerLink="/tab-platillos" lines="none" >
+          <ion-avatar slot="start">
+              <img src="../../../assets/user.png">
+          </ion-avatar>
+          <ion-label>
+              Mi perfil
+          </ion-label>
+      </ion-item>
+      <div class="p-1"></div>
+      <ion-item class="p-2 ion-item" routerLink="/tab-platillos" lines="none" >
+          <ion-avatar slot="start">
+              <img src="../../../assets/gear.png">
+          </ion-avatar>
+          <ion-label>
+              Configuración
+          </ion-label>
+      </ion-item>
+      <div class="p-1"></div>
+      <ion-item class="p-2 ion-item" routerLink="/tab-platillos" lines="none" >
+          <ion-avatar slot="start">
+              <img src="../../../assets/paid.png">
+          </ion-avatar>
+          <ion-label>
+              Livereat plus
+          </ion-label>
+      </ion-item>
+      <div class="p-1"></div>
+      <ion-item  class="p-2 ion-item" routerLink="/tab-platillos" lines="none" >
+          <ion-avatar slot="start">
+              <img src="../../../assets/help.png">
+          </ion-avatar>
+          <ion-label>
+              Ayuda
+          </ion-label>
+      </ion-item>
+  </ion-list>
+  
+  <br>
+
+</ion-content>

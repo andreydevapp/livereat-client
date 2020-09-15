@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>carrito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="medium">
+
+  <ion-item lines="none" *ngIf='cantidadEnCarrito > 0' color="light" class="w-100">
+    <label>Mi carrito de pedidos</label>
+  </ion-item>
+
+  <div *ngIf='cantidadEnCarrito === 0'>
+    <img class="m-auto w-75" src="../../../assets/cart.png" alt="cart empty">
+  </div>
+
+  <ion-card color="light" *ngFor="let negocio of carrito">
+    
+    <ion-card-header>
+      <strong>
+        <label class="text-muted">
+         Pedido a:
+        </label>
+      </strong>
+      <ion-item >
+        <ion-avatar slot="start">
+          <img [src]="negocio.imgUrlNegocio" alt="Imagen cliente">
+        </ion-avatar>
+        <label>
+          <h5>
+            {{negocio.nombreNegocio}}
+          </h5>
+        </label>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-item lines="full" *ngFor="let platillo of negocio.pedidos">
+      <ion-thumbnail slot="start">
+        <img [src]="platillo.imgUrlPlatilloMin">
+      </ion-thumbnail>
+      <label slot="start">
+        <h3>{{platillo.nombrePlatillo}}</h3>
+        <p><li>Cantidad: {{platillo.cantidad}}</li></p>
+        <p><li>Precio ₡ {{platillo.precio | number}}</li></p>
+
+        <ion-buttons class="btn-eliminar" (click)='eliminar(platillo.idPlatillo,negocio.idNegocio)'>
+          <ion-button>
+            <ion-icon class="text-danger" name="trash"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
+        <ion-buttons class="btn-canti btn-menos">
+          <ion-button color="danger" no-padding  fill="clear" (click)='disminuir(platillo.idPlatillo,negocio.idNegocio)'>
+            <ion-icon ios="ios-remove" md="md-remove"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        
+
+        <ion-buttons class="btn-canti">
+          <ion-button color="success" class="btn-canti"  no-padding  fill="clear" (click)='aumentar(platillo.idPlatillo,negocio.idNegocio)'>
+            <ion-icon class="icon-canti" ios="ios-add" md="md-add"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
+      </label>
+    </ion-item>
+    <br>
+    <ion-list class="text-center">
+      <h5>
+        Zonas de entrega
+      </h5>
+      <ion-item *ngFor="let envio of negocio.zonasDeEnvio">
+        <ion-label>
+          <h5>{{envio.lugar}}</h5>
+          <h5>precio de envio: {{envio.precio}}</h5>
+        </ion-label> 
+        
+        <ion-checkbox (click)="valueCheck(negocio.idNegocio, envio.id)" slot="end" [(ngModel)]="envio.check"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <br>
+    <label class="total">
+      Total:  ₡{{negocio.total | number}}
+    </label>
+    <div class="p-2">
+      <ion-button expand="full" (click)="confirmarPedido(negocio.idNegocio)">
+        Ordenar
+      </ion-button>
+    </div>
+  </ion-card>
+
+  
+</ion-content>

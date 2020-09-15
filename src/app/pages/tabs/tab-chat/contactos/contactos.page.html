@@ -1,0 +1,25 @@
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  <ul class="list-group bg-imagen">
+    <div [routerLink]="[ '/mensajes',usuario._id+'separador'+usuario.nombreNegocio+'separador'+usuario.imagen]" *ngFor="let usuario of usuariosActivosObs">
+      
+      <ion-item *ngIf="usuario._id !== usuarioService.usuario.id">
+
+        <ion-avatar slot="start">
+          
+          <img [src]="uri+usuario.imagen">
+        </ion-avatar>
+        <div>
+          <li class="w-100">
+            {{ usuario.nombreNegocio }}
+            <div *ngIf="usuario.conectado === 1" class="conectado" >
+            </div>
+          </li>
+        </div>
+
+      </ion-item>
+      
+    </div>
+  </ul>
+</ion-content>
+
+
